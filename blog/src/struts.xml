@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="false" />
+
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<package name="default" extends="struts-default">
+
+		<action name="login" class="com.login.CheckUser" method="execute">
+			<result name="1">myprofile.jsp</result>
+			<result name="2">index.jsp</result>
+		</action>
+	
+		<action name="register" class="com.register.AddUser" method="execute">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="1">signup.jsp</result>
+			<result name="2">index.jsp</result>
+			<result name="3">myprofile.jsp</result>
+		</action>
+
+		<action name="change-signup-login" class="com.link_signup_login.linker">
+			<result name="1">index.jsp</result>
+		</action>
+		<action name="change-login-signup" class="com.link_signup_login.linker"
+			method="signup">
+			<result name="1">signup.jsp</result>
+		</action>
+		<action name="upload" class="com.controller.post.Upload" method="execute">
+			<interceptor-ref name="fileUpload">
+			<param name="maximumSize">67108864</param>
+			<param name="allowedTypes">
+			image/png,image/gif,image/jpg,image/jpeg,image/pjpeg,video/mp4
+			</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="1">myprofile.jsp</result>
+			<result name="2">form-drofify.jsp</result>
+		</action>
+		<action name="sendotpregister" class="com.otp.Checkotpregister"
+			method="execute">
+			<result name="success">myprofile.jsp</result>
+			<result name="fail">signup.jsp</result>
+		</action>
+		<action name="changepassword" class="com.otp.forgetPassword" method="execute">
+			<result name="send">forgetPassword.jsp</result>
+			<result name="success">changepass.jsp</result>
+			<result name="fail">index.jsp</result>
+		</action>
+		<action name="checkLike" class="com.Likepost.AddLike" method="execute">
+			<result>profile-post.jsp</result>
+		</action>
+		<action name="checkLikeMyProfile" class="com.Likepost.AddLike" method="execute">
+			<result>myprofile.jsp</result>
+		</action>
+		<action name="checkLikeProfile" class="com.Likepost.AddLike" method="execute">
+			<result>otherprofile.jsp</result>
+		</action>
+		<action name="checkLikeCard" class="com.Likepost.AddLike" method="execute">
+			<result>ui-card.jsp</result>
+		</action>
+		<action name="deletePost" class="com.Delete.DeletePost" method="execute">
+			<result>myprofile.jsp</result>
+		</action>
+		<action name="deleteComment" class="com.Delete.DeleteComment" method="execute">
+			<result>profile-post.jsp</result>
+		</action>
+		<action name="sendotp" class="com.otp.Checkotp" method="execute">
+			<result name="success">changepass.jsp</result>
+			<result name="fail">index.jsp</result>
+		</action>
+		<action name="logout" class="com.session.Logout">
+			<result name="1">index.jsp</result>
+		</action>
+		<action  name="welcome" class ="com.currentpost.currentpostid">
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="1">profile-post.jsp</result>
+				<result name="2">profile-post.jsp</result>
+		</action>
+		
+		<action name="addcomment" class="com.AddComment.AddComment">
+			<result name="success">profile-post.jsp</result>
+		</action>
+		<action name="addcommentmyprofile" class="com.AddComment.AddComment">
+			<result name="success">myprofile.jsp</result>
+		</action>
+		<action name="addcommentCard" class="com.AddComment.AddComment">
+			<result name="success">ui-card.jsp</result>
+		</action>
+		<action name="addcommentProfile" class="com.AddComment.AddComment">
+			<result name="success">otherprofile.jsp</result>
+		</action>
+		<action name="request" class="com.Follow.response">
+			<result name="success">notification.jsp</result>
+		</action>
+		<action name="follow" class="com.Follow.Request">
+			<result name="success">otherprofile.jsp</result>
+		</action>
+		<action name="otherprofile" class="com.Follow.CheckProfile">
+			<result name="success">otherprofile.jsp</result>
+		</action>
+		<action name="addstory" class="com.add.Story">
+			
+			<result name="success">myprofile.jsp</result>
+		</action>
+		<action name="storydisplay" class="com.add.StoryDisplay">	
+			<result name="success">storypage.jsp</result>
+		</action>
+		<action name="changestory" class="com.add.SetCurrentStory">
+			<result name="success">storypage.jsp</result>
+			<result name="fail">myprofile.jsp</result>
+		</action>
+		<action name="changestorybyselect" class="com.add.ChooseStory">
+			<result name="success">storypage.jsp</result>
+			<result name="fail">myprofile.jsp</result>
+		</action>
+		<action name="changepass" class="com.otp.ChangePassword">
+			<result name="success">ui-card.jsp</result>
+			<result name="fail">index.jsp</result>
+		</action>
+	</package>
+</struts>      
