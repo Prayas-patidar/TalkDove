@@ -638,7 +638,7 @@
 													System.out.println(datetime);
 													ins.close();
 													String user = rs.getString("postid").substring(0, rs.getString("postid").indexOf("post"));
-													if (!(follower.contains(user) || user.equals(CurrentUserInfo.getEmail()))) {
+													if (!(followers.contains(user) || user.equals(CurrentUserInfo.getEmail()))) {
 														continue;
 													}
 													Statement st1 = con.createStatement();
